@@ -31,6 +31,7 @@ def init_db() -> None:
         stock INTEGER NOT NULL CHECK (stock >= 0),
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
+    
 
     CREATE TABLE IF NOT EXISTS orders (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
