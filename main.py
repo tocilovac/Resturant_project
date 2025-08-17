@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from typing import  Optional
 
-from Database import init_db, seed_menu_if_empty
+from Database import init_db, seed_burgers_if_empty
 from Auth import register_user, login_user, get_user_id_by_username
 from orders import validate_and_place_order, list_menu, list_user_orders
 
@@ -25,7 +25,7 @@ class OrderRequest(BaseModel):
 @app.on_event("startup")
 def on_startup():
     init_db()
-    seed_menu_if_empty() #comment out if you don't want auto-seeding
+    seed_burgers_if_empty() #comment out if you don't want auto-seeding
 
 @app.get("/menu")
 def get_menu():
