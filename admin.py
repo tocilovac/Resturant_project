@@ -1,5 +1,5 @@
 import sqlite3
-from Database import get_db_connection
+from Database import get_connection
 
 ADMIN_username = "arian"
 ADMIN_password = "arian123"
@@ -11,7 +11,7 @@ def admin_login(username: str, password: str):
 
 
 def add_menu_item(name: str, price: float, quantity: int):
-    conn = get_db_connection()
+    conn = get_connection()
     cursor = conn.cursor()
     
     try:
@@ -25,7 +25,7 @@ def add_menu_item(name: str, price: float, quantity: int):
         conn.close()
 
 def update_menu_item(item_id: int, price: float = None, quantity: int = None):
-    conn = get_db_connection()
+    conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("select id from menu_items where id = ?", (item_id))
@@ -42,7 +42,7 @@ def update_menu_item(item_id: int, price: float = None, quantity: int = None):
     return {"message": f"item {item_id} updated successfully."}
 
 def delete_menu_item(item_id: int):
-    conn = get_db_connection()
+    conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("delete from menu_items where id = ?", (item_id,))
@@ -54,7 +54,7 @@ def delete_menu_item(item_id: int):
     return {"message": f"item {item_id} deleted successfully."}
 
 def list_menu_items():
-    conn = get_db_connection()
+    conn = get_connection()
     cursor = conn.cursor()
 
     cursor.execute("select id, name, price, quantity from menu_items")
